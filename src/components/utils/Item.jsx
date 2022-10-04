@@ -1,11 +1,27 @@
 import React from 'react';
 import { StarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
 
-const Item = ({ btn, color, id, img, price, rating, shadow, text, title }) => {
+const Item = ({
+  exists,
+  btn,
+  color,
+  id,
+  img,
+  price,
+  rating,
+  shadow,
+  text,
+  title
+}) => {
   return (
     <div
-      className={`relative bg-gradient-to-b ${color} ${shadow} grid items-center justify-items-center rounded py-4 px-5 transitions-theme w-full hover:scale-105`}>
-      <div className='grid items-center justify-items-center`'>
+      className={`relative bg-gradient-to-b ${color} ${shadow} grid items-center ${
+        exists ? 'justify-items-start' : 'justify-items-center'
+      } rounded py-4 px-5 transitions-theme w-full hover:scale-105`}>
+      <div
+        className={`grid items-center ${
+          exists ? 'justify-items-start' : 'justify-items-center'
+        }`}>
         <h1 className='text-slate-200 textt-xl lg:text-lg md:text-base font-medium filter drop-shadow'>
           {title}
         </h1>
@@ -36,11 +52,16 @@ const Item = ({ btn, color, id, img, price, rating, shadow, text, title }) => {
           </button>
         </div>
       </div>
-      <div className=''>
+      <div
+        className={`flex items-center ${
+          exists ? 'absolute top-5 right-1' : 'justify-center'
+        }`}>
         <img
           src={img}
-          alt='img/item-img'
-          className='h-36 w-64 transitions-theme hover:-rotate-12'
+          alt={`img/item-img${id}`}
+          className={`transitions-theme hover:-rotate-12 ${
+            exists ? 'h-auto w-64 lg:w-56 md:w-48 -rotate-[35deg]' : 'h-36 w-64'
+          }`}
         />
       </div>
     </div>

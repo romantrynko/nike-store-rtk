@@ -4,13 +4,14 @@ import { heroapi, popularsales, topratesales } from './data/data';
 
 const App = () => {
   return (
-    <>
-      <main>
-        <Hero heroapi={heroapi} />
-        <Sales endpoint={popularsales} />
-        <Sales endpoint={topratesales} />
-      </main>
-    </>
+    <main className='flex flex-col gap-16 relative'>
+      <Hero heroapi={heroapi} />
+      <Sales
+        endpoint={popularsales}
+        exists
+      />
+      <Sales endpoint={topratesales} />
+    </main>
   );
 };
 
