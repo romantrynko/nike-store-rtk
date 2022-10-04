@@ -66,6 +66,7 @@
   /* Clip-path */
   .clip-path {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65%);
+    clip-path: polygon(8% 11%, 109% 0%, 91% 98%, -11% 63%, 20% 27%);
   }
 
   /* Blur-Effect */
