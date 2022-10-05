@@ -247,7 +247,7 @@ const topratesales = {
 };
 
 
-const story = {
+const stories = {
   title: "Top Stories",
   news: [
     {
@@ -374,4 +374,4 @@ const footerAPI = {
   ]
 };
 
-export { heroapi, footerAPI, story, sneaker, highlight, topratesales, popularsales };
+export { heroapi, footerAPI, stories, sneaker, highlight, topratesales, popularsales };
