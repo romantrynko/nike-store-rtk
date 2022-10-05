@@ -32,7 +32,7 @@ const Stories = ({ stories: { title, news } }) => {
         <Splide options={splideOptions}>
           {news.map((item, index) => {
             const truncText = truncate(item.text, {
-              length: '70'
+              length: 70
             });
             return (
               <SplideSlide
