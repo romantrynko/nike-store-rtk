@@ -13,7 +13,7 @@ import FlexContent from './components/FlexContent';
 import Navbar from './components/Navbar';
 
 const App = () => {
-  return (
+ return (
     <>
       <Navbar />
       <Cart />
