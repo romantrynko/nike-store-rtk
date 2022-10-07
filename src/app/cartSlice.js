@@ -45,13 +45,33 @@ const cartSlice = createSlice({
       toast.success(`${action.payload.title} removed from cart`)
     },
     increaseCountOfItem: (state, action) => {
-      const foundItem = state.cartItems.find(item => item.id === action.payload.id)
+      const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id)
 
+      if (itemIndex > 0) {
+        state.cartItems[itemIndex].productAmmount += 1
+
+        toast.success(`One more ${action.payload.title} added`)
+      }
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
+    },
+    decreaseCountOfItem: (state, action) => {
+      const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id)
+
+      if (state.cartItems[itemIndex].productAmmount > 1) {
+        state.cartItems[itemIndex].productAmmount -= 1
+
+        toast.success(`One ${action.payload.title} removed`)
+      }
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
+    },
+    clearCart: (state, action) => {
+      state.cartItems = [];
+      toast.success('Your cart is empty')
     }
   }
 })
 
-export const { setOpenCart, setCloseCart, addItemToCart, removeItemFromCart } = cartSlice.actions;
+export const { setOpenCart, setCloseCart, addItemToCart, removeItemFromCart, increaseCountOfItem, decreaseCountOfItem, clearCart } = cartSlice.actions;
 
 export const cartStateSelector = state => state.cart.cartState;
 
