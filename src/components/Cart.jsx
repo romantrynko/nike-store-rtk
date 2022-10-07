@@ -37,7 +37,7 @@ const Cart = () => {
           <CartEmpty />
         ) : (
           <div>
-            <div className='flex flex-col gap-10'>
+            <div className='flex flex-col items-start justify-start gap-y-14 lg:gap-y-12 overflow-y-scroll h-[95vh] scroll-hidden pb-8'>
               {cartItems.map((item, index) => (
                 <CartItem
                   key={index}

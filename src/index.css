@@ -10,6 +10,10 @@
     font-family: 'Poppins', sans-serif;
   }
 
+  /* .no-scroll {
+    over
+  } */
+
   .hero-wrapper {
     @apply relative h-auto w-auto flex flex-col
   }

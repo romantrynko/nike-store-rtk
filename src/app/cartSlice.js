@@ -11,10 +11,12 @@ const cartSlice = createSlice({
   name: 'cart',
   reducers: {
     setOpenCart: (state, action) => {
-      state.cartState = action.payload.cartState
+      state.cartState = action.payload.cartState;
+      document.body.style.overflow = 'hidden';
     },
     setCloseCart: (state, action) => {
       state.cartState = action.payload.cartState
+      document.body.style.overflow = 'auto';
     },
     addItemToCart: (state, action) => {
       const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id)
