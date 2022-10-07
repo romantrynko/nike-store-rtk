@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   cartStateSelector,
   cartItemSelector,
-  setCloseCart
+  setCloseCart,
+  clearCart
 } from '../app/cartSlice';
 
 const Cart = () => {
@@ -22,6 +23,10 @@ const Cart = () => {
     );
   };
 
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
   return (
     <div
       className={`fixed top-0 left-0 ring-0 blur-0 blur-effect-theme w-full h-screen opacity-100 z-[250] ${
@@ -31,7 +36,10 @@ const Cart = () => {
       }`}>
       <div
         className={`blur-effect-theme h-screen max-w-xl w-full absolute right-0`}>
-        <CartCount onCartToggle={onCartToggle} />
+        <CartCount
+          onCartToggle={onCartToggle}
+          handleClearCart={handleClearCart}
+        />
 
         {cartItems?.length === 0 ? (
           <CartEmpty />
@@ -54,7 +62,9 @@ const Cart = () => {
                 </h1>
               </div>
               <div className='grid items-center gap-2'>
-                <p className='text-sm font-medium text-center'>Taxes and Shipping Will Calculate At shipping</p>
+                <p className='text-sm font-medium text-center'>
+                  Taxes and Shipping Will Calculate At shipping
+                </p>
                 <button
                   type='button'
                   className='button-theme bg-theme-cart text-white'>

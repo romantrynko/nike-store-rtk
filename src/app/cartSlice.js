@@ -47,7 +47,7 @@ const cartSlice = createSlice({
     increaseCountOfItem: (state, action) => {
       const itemIndex = state.cartItems.findIndex((item) => item.id === action.payload.id)
 
-      if (itemIndex > 0) {
+      if (itemIndex >= 0) {
         state.cartItems[itemIndex].productAmmount += 1
 
         toast.success(`One more ${action.payload.title} added`)

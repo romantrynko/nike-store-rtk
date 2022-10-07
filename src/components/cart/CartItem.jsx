@@ -29,7 +29,6 @@ const CartItem = ({
   const handleDecreaseItemCount = () => {
     dispatch(decreaseCountOfItem({ id, title }));
   };
-  const handleClearCart = () => {};
 
   return (
     <div className='flex items-center justify-between w-full px-5'>
