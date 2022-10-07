@@ -34,14 +34,29 @@ const cartSlice = createSlice({
       }
 
       localStorage.setItem('cart', JSON.stringify(state.cartItems))
+    },
+    removeItemFromCart: (state, action) => {
+      const filteredItems = state.cartItems.filter(item => item.id !== action.payload.id);
+      console.log(action.payload.id);
+
+      state.cartItems = filteredItems
+      localStorage.setItem('cart', JSON.stringify(filteredItems));
+
+      toast.success(`${action.payload.title} removed from cart`)
+    },
+    increaseCountOfItem: (state, action) => {
+      const foundItem = state.cartItems.find(item => item.id === action.payload.id)
+
     }
   }
 })
 
-export const { setOpenCart, setCloseCart, addItemToCart } = cartSlice.actions;
+export const { setOpenCart, setCloseCart, addItemToCart, removeItemFromCart } = cartSlice.actions;
 
 export const cartStateSelector = state => state.cart.cartState;
 
 export const cartItemSelector = state => state.cart.cartItems;
+
+export const cartItemsAmount = state => state.cart.cartItems.length
 
 export default cartSlice.reducer;

@@ -37,13 +37,30 @@ const Cart = () => {
           <CartEmpty />
         ) : (
           <div>
-            <div className='flex flex-col items-start justify-start gap-y-14 lg:gap-y-12 overflow-y-scroll h-[95vh] scroll-hidden pb-8'>
+            <div className='flex flex-col items-start justify-start gap-y-14 lg:gap-y-12 overflow-y-scroll h-[81vh] scroll-hidden py-6'>
               {cartItems.map((item, index) => (
                 <CartItem
                   key={index}
                   {...item}
                 />
               ))}
+            </div>
+
+            <div className='fixed bottom-0 bg-white w-full px-5 py-2 grid items-center'>
+              <div className='flex item-center justify-between'>
+                <h1 className='text-base font-semibold'>Subtotal</h1>
+                <h1 className='text-sm rounded bg-theme-cart text-slate-100 px-1 py-0.5'>
+                  000
+                </h1>
+              </div>
+              <div className='grid items-center gap-2'>
+                <p className='text-sm font-medium text-center'>Taxes and Shipping Will Calculate At shipping</p>
+                <button
+                  type='button'
+                  className='button-theme bg-theme-cart text-white'>
+                  Check out
+                </button>
+              </div>
             </div>
           </div>
         )}

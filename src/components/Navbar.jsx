@@ -5,13 +5,15 @@ import {
   MagnifyingGlassIcon,
   ShoppingBagIcon
 } from '@heroicons/react/24/outline';
-import { setOpenCart } from '../app/cartSlice';
-import { useDispatch } from 'react-redux';
+import { setOpenCart, cartItemsAmount } from '../app/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [navState, setNavState] = useState(false);
 
   const dispatch = useDispatch();
+
+  const totalQTY = useSelector(cartItemsAmount);
 
   const onCartToggle = () => {
     dispatch(setOpenCart({ cartState: true }));
@@ -79,7 +81,7 @@ const Navbar = () => {
                     ? 'bg-slate-900 text-slate-100 shadow-slate-900'
                     : 'bg-slate-100 text-slate-900 shadow-slate-100'
                 }`}>
-                {/* {totalQTY} */}
+                {totalQTY}
               </div>
             </button>
           </li>

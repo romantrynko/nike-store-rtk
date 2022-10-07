@@ -1,5 +1,7 @@
 import React from 'react';
 import { MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { useDispatch } from 'react-redux';
+import { removeItemFromCart } from '../../app/cartSlice';
 
 const CartItem = ({
   id,
@@ -11,6 +13,12 @@ const CartItem = ({
   price,
   productAmmount
 }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteItem = () => {
+    dispatch(removeItemFromCart({ id, title }));
+  };
+
   return (
     <div className='flex items-center justify-between w-full px-5'>
       <div className='flex items-center gap-5'>
@@ -55,6 +63,7 @@ const CartItem = ({
         <div className=''>
           <button
             type='button'
+            onClick={handleDeleteItem}
             className='bg-theme-cart rounded text-white justify-center items-center p-1 lg:p-0.5 grid'>
             <TrashIcon className='w-5 h-5' />
           </button>
