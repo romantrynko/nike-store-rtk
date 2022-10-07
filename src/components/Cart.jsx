@@ -2,10 +2,25 @@ import React from 'react';
 import CartCount from './cart/CartCount';
 import CartEmpty from './cart/CartEmpty';
 import CartItem from './cart/CartItem';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  cartStateSelector,
+  cartItemSelector,
+  setCloseCart
+} from '../app/cartSlice';
 
 const Cart = () => {
-  const cartState = useSelector((state) => state.cart.cartState);
+  const dispatch = useDispatch();
+  const cartState = useSelector(cartStateSelector);
+  const cartItems = useSelector(cartItemSelector);
+
+  const onCartToggle = () => {
+    dispatch(
+      setCloseCart({
+        cartState: false
+      })
+    );
+  };
 
   return (
     <div
@@ -16,9 +31,22 @@ const Cart = () => {
       }`}>
       <div
         className={`blur-effect-theme h-screen max-w-xl w-full absolute right-0`}>
-        <CartCount />
-        <CartEmpty />
-        <CartItem />
+        <CartCount onCartToggle={onCartToggle} />
+
+        {cartItems?.length === 0 ? (
+          <CartEmpty />
+        ) : (
+          <div>
+            <div className='flex flex-col gap-10'>
+              {cartItems.map((item, index) => (
+                <CartItem
+                  key={index}
+                  {...item}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
