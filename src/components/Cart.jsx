@@ -9,7 +9,8 @@ import {
     setCloseCart,
     clearCart,
     getTotals,
-    cartItemsCost
+    cartItemsCost,
+    cartItemsAmount
 } from '../app/cartSlice';
 
 const Cart = () => {
@@ -17,6 +18,7 @@ const Cart = () => {
   const cartState = useSelector(cartStateSelector);
   const cartItems = useSelector(cartItemSelector);
   const totalPrice = useSelector(cartItemsCost);
+  const totalQTY = useSelector(cartItemsAmount);
 
   useEffect(() => {
     dispatch(getTotals());
@@ -46,6 +48,7 @@ const Cart = () => {
         <CartCount
           onCartToggle={onCartToggle}
           handleClearCart={handleClearCart}
+          totalQTY={totalQTY}
         />
 
         {cartItems?.length === 0 ? (
@@ -65,7 +68,7 @@ const Cart = () => {
               <div className='flex item-center justify-between'>
                 <h1 className='text-base font-semibold'>Subtotal</h1>
                 <h1 className='text-sm rounded bg-theme-cart text-slate-100 px-1 py-0.5'>
-                  {totalPrice}
+                  ${totalPrice}
                 </h1>
               </div>
               <div className='grid items-center gap-2'>
