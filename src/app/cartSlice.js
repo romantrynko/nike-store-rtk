@@ -3,7 +3,9 @@ import { toast } from 'react-hot-toast'
 
 const initialState = {
   cartState: false,
-  cartItems: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+  cartItems: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
+  cartTotalQuantity: 0,
+  cartTotalAmount: 0
 }
 
 const cartSlice = createSlice({
@@ -67,16 +69,44 @@ const cartSlice = createSlice({
     clearCart: (state, action) => {
       state.cartItems = [];
       toast.success('Your cart is empty')
+    },
+    getTotals: (state, action) => {
+      let { totalAmount, totalQuantity } = state.cartItems.reduce((cartTotal, item) => {
+        const { price, productAmmount } = item;
+        const totalPrice = price * productAmmount;
+
+        cartTotal.totalAmount += totalPrice;
+        cartTotal.totalQuantity += productAmmount;
+
+        return cartTotal;
+      }, {
+        totalAmount: 0,
+        totalQuantity: 0
+      })
+
+      state.cartTotalAmount = totalAmount;
+      state.cartTotalQuantity = totalQuantity;
     }
   }
 })
 
-export const { setOpenCart, setCloseCart, addItemToCart, removeItemFromCart, increaseCountOfItem, decreaseCountOfItem, clearCart } = cartSlice.actions;
+export const {
+  setOpenCart,
+  setCloseCart,
+  addItemToCart,
+  removeItemFromCart,
+  increaseCountOfItem,
+  decreaseCountOfItem,
+  clearCart,
+  getTotals
+} = cartSlice.actions;
 
 export const cartStateSelector = state => state.cart.cartState;
 
 export const cartItemSelector = state => state.cart.cartItems;
 
-export const cartItemsAmount = state => state.cart.cartItems.length
+export const cartItemsAmount = state => state.cart.cartTotalQuantity;
+
+export const cartItemsCost = state => state.cart.cartTotalAmount;
 
 export default cartSlice.reducer;
